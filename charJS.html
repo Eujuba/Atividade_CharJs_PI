@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementando o ChartJs</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head style="display: flex;justify-content: center; flex-direction: column;">
+
+<body>
+
+  <header>
+    <h1>Dashboard</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Sobre nós</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Calculadora financeira</a></li>
+      </ul>
+    </nav>
+  </header>
+  <style>
+    header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+    header h1{
+      font-size: 30px;
+      color: #000;
+    }
+    header nav{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header nav ul{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header nav ul li{
+      /* retira o indicador de lista (bolinha)*/
+      list-style: none;
+      margin-right: 20px;
+    }
+    header nav ul li a{
+      text-decoration: none;
+      color: #000;
+    }
+  </style>
+     
+  
+ 
+
+<div id="graficos" style="display: flex;
+  flex-direction: column;
+   justify-content: center;
+   align-items: center; 
+   padding: 10px;
+   margin-left: 50px;
+   margin-right: 50px;">  
+
+
+  <div style="margin-bottom: 50px;">
+    <h1>Verifique os dados dos sensores abaixo!</h1>
+  </div>
+
+  <div style="display:flex; flex-direction:row;">
+  <div>
+   <!-- Canvas é uma tag que permite que renderizamos algo nela (neste caso um gráfico) -->
+    <canvas id="myChart" style="position: relative; height:40vh; width:40vw"></canvas>
+  </div>
+
+  <div>
+    <canvas id="myChart2" style="position: relative; height:40vh; width:40vw"></canvas>
+  </div>
+  
+</div>
+</div>
+
+</body>
+
+<!-- setup - configuração -->
+<script>
+  // vetor (const - constante (vai iniciar do 12:00 e vai até 17:00))
+  const labels = [
+    '12:00',
+    '13:00',
+    '14:00',
+    '15:00',
+    '16:00',
+    '17:00',
+  ];
+
+  // vetor (engloba o jason) de jason(jason contém várias propriedades que formam uma coisa só) 
+  const data = {
+    labels: labels,
+    datasets: [{
+       // título do gráfico
+      label: 'Temperatura',
+      // cor do gráfico
+      backgroundColor: 'rgb(255, 99, 132)',
+      // cor da borda
+      borderColor: 'rgb(255, 99, 132)',
+      // dados do gráfico
+      data: [30, 29, 28, 25, 22, 23],
+    },
+    
+    {
+       // 2º linha do gráfico
+      label: 'Umidade',
+      backgroundColor: 'rgb(0, 0, 255)',
+      borderColor: 'rgb(0, 0, 255)',
+      data: [80, 82, 80, 85, 80, 83],
+    }
+  
+  ]
+    
+  };
+
+  // configuração do gráfico
+  const config = {
+    // tipo do gráfico (neste caso o de linha)
+    type: 'line',
+    // dados do gráfico (configuro o valor tipo "data", onde seus dados eu configurei acima)
+    data: data,
+    // opções do gráfico (neste caso, não tem nada)
+    options: {}
+  };
+
+
+
+
+  // instanciando o gráfico 2 (barras)
+  const labels2 = [
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+  ];
+
+
+  const data2 = {
+    labels: labels2,
+    datasets: [{
+      label: 'Temperatura média',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [22, 24, 27, 23, 20, 18],
+    },
+  
+      {
+    label: 'Umidade média',
+      backgroundColor: 'rgb(0, 0, 255)',
+      borderColor: 'rgb(0, 0, 255)',
+      data: [90, 89, 93, 87, 88, 82],
+    }
+  
+
+  ]
+  };
+  const config2 = {
+    // tipo barras
+    type: 'bar',
+    data: data2,
+    options: {}
+  };
+</script>
+
+<!-- pega a configuração e coloca dentro do gráfico-->
+<script>
+  // crio uma constante com o id do gráfico (criado acima como "myChart"), e com isso eu crio um novo gráfico ("new Chart") 
+  const myChart = new Chart(
+    // busca no documento um elemento que tenha o id "myChart"
+    document.getElementById('myChart'),
+   // passa as configurações do gráfico (que estão acima como "config") 
+    config
+  );
+
+  const myChart2 = new Chart(
+    document.getElementById('myChart2'),
+    config2
+  );
+
+</script>
+
+
+</html>
